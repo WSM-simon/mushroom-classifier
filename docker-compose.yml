@@ -1,10 +1,8 @@
-version: '3.9'
-
 services:
   mushroom-classifier:
     build:
       context: .
-      dockerfile: DOCKERFILE
+      dockerfile: Dockerfile
     container_name: mushroom-classifier
     ports:
       - "9999:8000"
