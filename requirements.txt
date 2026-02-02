@@ -1,0 +1,7 @@
+# Core dependencies for mushroom classifier API
+fastapi==0.115.2
+uvicorn[standard]==0.30.0
+pillow==10.2.0
+numpy==1.26.4
+keras==3.13.2
+tensorflow==2.20.0

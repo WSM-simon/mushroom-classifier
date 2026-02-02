@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  mushroom-classifier:
+    build:
+      context: .
+      dockerfile: DOCKERFILE
+    container_name: mushroom-classifier
+    ports:
+      - "9999:8000"
+    volumes:
+      - ./mushroom_model.keras:/app/mushroom_model.keras:ro
+    environment:
+      - CUDA_VISIBLE_DEVICES=-1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
