@@ -5,15 +5,25 @@ services:
       dockerfile: Dockerfile
     container_name: mushroom-classifier
     ports:
-      - "9999:8000"
-    volumes:
-      - ./mushroom_model.keras:/app/mushroom_model.keras:ro
+      - "8000:8000"
     environment:
       - CUDA_VISIBLE_DEVICES=-1
+      - TF_CPP_MIN_LOG_LEVEL=2
+    volumes:
+      - ./mushroom_model.keras:/app/mushroom_model.keras:ro
+      - ./mushroom_names.json:/app/mushroom_names.json:ro
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9999/"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
+    # Uncomment for GPU support (requires nvidia-docker):
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
