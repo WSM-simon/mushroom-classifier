@@ -8,7 +8,7 @@ os.environ.setdefault("CUDA_VISIBLE_DEVICES", "-1")
 
 import numpy as np
 from PIL import Image
-from fastapi import FastAPI, File, Form, UploadFile, HTTPException
+from fastapi import FastAPI, File, Form, UploadFile, HTTPException, Request
 from fastapi.responses import JSONResponse, RedirectResponse
 import keras
 
@@ -69,9 +69,9 @@ def startup_event():
 
 
 @app.get("/")
-async def web_documentation():
+async def web_documentation(request: Request):
     """Redirect to local FastAPI docs."""
-    return RedirectResponse("/docs")
+    return RedirectResponse(request.url_for("swagger_ui_html"))
 
 
 @app.post("/predict")
