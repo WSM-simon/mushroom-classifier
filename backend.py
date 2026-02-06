@@ -286,8 +286,8 @@ async def web_interface():
             <div id="results"></div>
 
             <div class="api-docs-link">
-                <a href="/docs" target="_blank">📚 API Documentation (Swagger)</a> •
-                <a href="/redoc" target="_blank">📖 ReDoc</a>
+                <a href="docs" target="_blank">📚 API Documentation (Swagger)</a> •
+                <a href="redoc" target="_blank">📖 ReDoc</a>
             </div>
         </div>
 
@@ -333,7 +333,7 @@ async def web_interface():
                 resultsDiv.classList.remove('show');
 
                 try {
-                    const response = await fetch('/predict', {
+                    const response = await fetch('predict', {
                         method: 'POST',
                         body: formData
                     });
