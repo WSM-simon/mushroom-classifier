@@ -1,27 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   rewrites: async () => {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 
+      (process.env.NODE_ENV === "development" 
+        ? "http://127.0.0.1:8000" 
+        : "http://mushroom-classifier-backend:8000");
+    
     return [
       {
         source: "/api/:path*",
-        destination:
-          process.env.NODE_ENV === "development"
-            ? "http://127.0.0.1:8000/:path*"
-            : "/api/:path*",
+        destination: `${backendUrl}/:path*`,
       },
       {
         source: "/docs",
-        destination:
-          process.env.NODE_ENV === "development"
-            ? "http://127.0.0.1:8000/docs"
-            : "/api/docs",
+        destination: `${backendUrl}/docs`,
       },
       {
         source: "/openapi.json",
-        destination:
-          process.env.NODE_ENV === "development"
-            ? "http://127.0.0.1:8000/openapi.json"
-            : "/api/openapi.json",
+        destination: `${backendUrl}/openapi.json`,
       },
     ];
   },

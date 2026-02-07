@@ -60,8 +60,8 @@ steps:
       - echo "Repository sync complete!"
       - ls -lah "$REPO_DIR"
 
-  # 2) Build & push image to GHCR
-  - name: build-push-ghcr
+  # 2) Build & push backend image to GHCR
+  - name: build-push-backend
     image: plugins/docker
     environment:
       DOCKER_BUILDKIT: 1
@@ -72,6 +72,24 @@ steps:
         - latest
         - ${DRONE_COMMIT_SHA}
       dockerfile: Dockerfile
+      context: .
+      username:
+        from_secret: GHCR_USERNAME
+      password:
+        from_secret: GHCR_TOKEN
+
+  # 2b) Build & push frontend image to GHCR
+  - name: build-push-frontend
+    image: plugins/docker
+    environment:
+      DOCKER_BUILDKIT: 1
+    settings:
+      registry: ghcr.io
+      repo: ghcr.io/${DRONE_REPO_OWNER,,}/${DRONE_REPO_NAME,,}-frontend
+      tags:
+        - latest
+        - ${DRONE_COMMIT_SHA}
+      dockerfile: Dockerfile.frontend
       context: .
       username:
         from_secret: GHCR_USERNAME
