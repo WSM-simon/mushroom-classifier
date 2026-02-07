@@ -7,6 +7,7 @@ services:
     container_name: mushroom-classifier
     ports:
       - "9999:8000"
+      - "9998:8000"
     environment:
       - CUDA_VISIBLE_DEVICES=-1
       - TF_CPP_MIN_LOG_LEVEL=2
@@ -15,7 +16,7 @@ services:
       - ./mushroom_names.json:/app/mushroom_names.json:ro
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9999/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
