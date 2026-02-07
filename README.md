@@ -18,7 +18,7 @@ An AI-powered mushroom species identification application combining a FastAPI ba
 - **Uvicorn** - ASGI server
 
 ### Frontend
-- **Next.js 13** - React framework
+- **Next.js 15** - React framework
 - **TypeScript** - Type-safe JavaScript
 - **Tailwind CSS** - Utility-first CSS framework
 - **Radix UI** - Accessible component primitives
@@ -33,17 +33,15 @@ An AI-powered mushroom species identification application combining a FastAPI ba
 
 ### Installation
 
-1. **Install Python dependencies:**
-```bash
-pip install -r requirements.txt
-```
-
-2. **Install Node.js dependencies:**
+1. **Install Node.js dependencies:**
 ```bash
 npm install
 # or
 pnpm install
 ```
+
+2. **Python dependencies:**
+Python dependencies will be automatically installed in a virtual environment when you run `npm run dev` or `npm run fastapi-dev`.
 
 ### Running the Application
 
