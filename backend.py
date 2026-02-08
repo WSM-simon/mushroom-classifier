@@ -23,7 +23,6 @@ app = FastAPI(
     title="Mushroom Classifier",
     version="1.0",
     description="CPU inference backend for mushroom classification",
-    root_path="/mushrooms",
 )
 
 # Add CORS middleware for Next.js frontend
